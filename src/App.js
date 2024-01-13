@@ -1,27 +1,30 @@
 import { useState, useEffect } from "react";
-import { getMovies } from "./data/api";
+import { fetchMoviesWithDelay, infiniteScroll } from "./utils/utils";
+import MovieList from "./components/MovieList/MovieList";
 import "./App.css";
 
 function App() {
 	const [movies, setMovies] = useState([]);
+	const [page, setPage] = useState(1);
+	const [loading, setLoading] = useState(false);
 
 	const fetchMovies = async () => {
-		try {
-			const data = await getMovies();
-			setMovies(data);
-		} catch (error) {
-			console.error("Error fetching movies:", error);
-		}
+		await fetchMoviesWithDelay(page, setLoading, setMovies, setPage);
 	};
 
 	useEffect(() => {
 		fetchMovies();
 	}, []);
 
+	useEffect(() => {
+		return infiniteScroll(loading, fetchMovies);
+	}, [loading]);
+
 	return (
 		<div className="App">
-			<h1 className="text-3xl font-bold underline">Hello world!</h1>
-			<ul className="movies-list">{movies && movies.map((movie) => <li key={movie.id}>{movie.title}</li>)}</ul>
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+				<MovieList loading={loading} movies={movies} />
+			</div>
 		</div>
 	);
 }

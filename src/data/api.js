@@ -8,9 +8,9 @@ const options = {
 	}
 };
 
-export const getMovies = async () => {
+export const getMovies = async (page) => {
 	try {
-		const response = await fetch(baseURL, options);
+		const response = await fetch(`${baseURL}?page=${page}`, options);
 
 		if (!response.ok) {
 			throw new Error("Failed to fetch movie data");

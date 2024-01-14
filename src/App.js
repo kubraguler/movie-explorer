@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import { fetchMoviesWithDelay, infiniteScroll } from "./utils/utils";
+import Header from "./components/Header/Header";
 import MovieList from "./components/MovieList/MovieList";
+import MovieDetail from "./pages/MovieDetail";
 import "./App.css";
 
 function App() {
@@ -23,7 +26,11 @@ function App() {
 	return (
 		<div className="App">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<MovieList loading={loading} movies={movies} />
+				<Header />
+				<Routes>
+					<Route path="/" element={<MovieList loading={loading} movies={movies} />} />
+					<Route path="/movie/:id" element={<MovieDetail />} />
+				</Routes>
 			</div>
 		</div>
 	);

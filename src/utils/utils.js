@@ -30,3 +30,11 @@ export const infiniteScroll = (loading, fetchMovies) => {
 		window.removeEventListener("scroll", onScroll);
 	};
 };
+
+export const formatNumber = (number) => {
+	if (number >= 1000) {
+		return (number / 1000).toFixed(1) + "k";
+	} else {
+		return number.toString();
+	}
+};

@@ -1,4 +1,4 @@
-import Search from "../Search/Search";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Header = () => {
 	return (
@@ -8,7 +8,7 @@ const Header = () => {
 				<span>Movie </span>
 				<span>Tracker</span>
 			</h1>
-			<Search />
+			<SearchBar />
 		</header>
 	);
 };

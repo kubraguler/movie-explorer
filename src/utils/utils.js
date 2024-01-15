@@ -1,17 +1,21 @@
 import { getMovies } from "../data/api";
 
-export const fetchMoviesWithDelay = async (page, setLoading, setMovies, setPage) => {
+export const fetchMoviesWithDelay = async (page, setLoading, showError, setMovies, setPage) => {
 	setLoading(true);
 	try {
+		console.log("try");
 		const data = await getMovies(page);
+
 		setTimeout(() => {
+			setLoading(false);
 			setMovies((prevMovies) => [...prevMovies, ...data]);
 			setPage((prevPage) => prevPage + 1);
 		}, 1000);
 	} catch (error) {
+		console.log("catch");
 		console.error("Error fetching movies:", error);
-	} finally {
 		setLoading(false);
+		showError(error.toString());
 	}
 };
 

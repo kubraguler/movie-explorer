@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
+import MovieFeedPage from "./pages/MovieFeedPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
 import "./App.css";
-import MovieFeedPage from "./pages/MovieFeedPage";
 
 function App() {
 	return (

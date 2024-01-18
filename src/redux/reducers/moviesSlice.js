@@ -31,6 +31,21 @@ export const searchMovies = createAsyncThunk("searchMovies", async ({ query, pag
 	return data;
 });
 
+export const fetchNextPage = createAsyncThunk("fetchNextPage", async (args, { dispatch, getState }) => {
+	const state = getState().movies;
+
+	if (state.page === state.totalPage) {
+		console.log("no more page");
+		return;
+	}
+
+	if (state.query.length > 0) {
+		await dispatch(searchMovies({ query: state.query, page: state.page + 1 }));
+	} else {
+		await dispatch(getMovies(state.page + 1));
+	}
+});
+
 const moviesSlice = createSlice({
 	name: "movies",
 	initialState,
@@ -58,7 +73,13 @@ const moviesSlice = createSlice({
 		});
 		builder.addCase(searchMovies.fulfilled, (state, action) => {
 			state.loading = false;
-			state.movies = [...state.movies, ...action.payload.results];
+
+			if (action.payload.page === 1) {
+				state.movies = action.payload.results;
+			} else {
+				state.movies = [...state.movies, ...action.payload.results];
+			}
+
 			state.page = action.payload.page;
 			state.totalPage = action.payload.total_pages;
 		});

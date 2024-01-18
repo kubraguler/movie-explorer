@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovies } from "../redux/reducers/moviesSlice.js";
+import { getMovies, fetchNextPage } from "../redux/reducers/moviesSlice.js";
 import { infiniteScroll } from "../utils/utils.js";
 import MovieCard from "../components/MovieCard/MovieCard.js";
 import SpinnerView from "../components/SpinnerView/SpinnerView.js";
@@ -15,7 +15,7 @@ const MovieFeedPage = () => {
 
 	useEffect(() => {
 		return infiniteScroll(loading, () => {
-			dispatch(getMovies(page + 1));
+			dispatch(fetchNextPage());
 		});
 	}, [loading]);
 

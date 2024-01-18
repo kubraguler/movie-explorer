@@ -5,10 +5,13 @@ import { setQuery, searchMovies } from "../../redux/reducers/moviesSlice";
 
 const SearchBar = () => {
 	const dispatch = useDispatch();
-	const { query, page } = useSelector((state) => state.movies);
+	const { query } = useSelector((state) => state.movies);
 
 	const handleSearch = () => {
-		dispatch(searchMovies({ query, page }));
+		if (query === "") {
+			return;
+		}
+		dispatch(searchMovies({ query, page: 1 }));
 	};
 
 	const debouncedHandleSearch = _.debounce(handleSearch, 500);

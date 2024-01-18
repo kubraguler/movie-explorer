@@ -6,7 +6,7 @@ const MovieCard = ({ movie }) => {
 
 	return (
 		<li className="rounded-2xl shadow-md w-full sm:w-160 md:w-190" key={id}>
-			<Link to={`/movies/${id}`} state={movie}>
+			<Link className="block h-full" to={`/movies/${id}`} state={movie}>
 				<img className="rounded-2xl" src={`${basePosterURL}/${poster_path}`} alt={title} />
 			</Link>
 		</li>

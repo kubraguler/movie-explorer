@@ -11,12 +11,12 @@ const MovieDetail = () => {
 			<div className="flex-shrink-0">
 				<img className="rounded-2xl max-w-full lg:max-w-48" src={`${basePosterURL}/${movie.poster_path}`} alt={movie.title} />
 			</div>
-			<div className="flex-grow">
+			<div className="flex-grow my-10">
 				<h3 className="text-lg font-semibold">{movie.title}</h3>
-				<p className="text-gray-600">{movie.overview}</p>
-				<p className="text-gray-600">IMDB Rating</p>
-				<p className="text-gray-600">⭐ {movie.vote_average.toFixed(1)} / 10</p>
-				<p className="text-gray-600">{formatNumber(movie.vote_count)} Reviews</p>
+				<p className="text-gray-600 mb-2">{movie.overview}</p>
+				<p className="text-gray-600 mb-2">IMDB Rating</p>
+				<p className="text-gray-600 mb-2">⭐ {movie.vote_average.toFixed(1)} / 10</p>
+				<p className="text-gray-600 mb-10">{formatNumber(movie.vote_count)} Reviews</p>
 			</div>
 		</div>
 	);

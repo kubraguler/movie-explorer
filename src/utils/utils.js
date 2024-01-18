@@ -8,7 +8,6 @@ export const infiniteScroll = (loading, callback) => {
 	};
 
 	window.addEventListener("scroll", onScroll);
-
 	return () => {
 		window.removeEventListener("scroll", onScroll);
 	};
